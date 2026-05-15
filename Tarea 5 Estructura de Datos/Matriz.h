@@ -69,12 +69,12 @@ public:
 		for (int i = 0; i < columns; i++)
 			matriz[i] = new E[rows];
 		for (int i = 0; i < rows; i++)
-			for (int j = 0; j < columns; i++)
+			for (int j = 0; j < columns; j++)
 				matriz[j][i] = temp[i][j];
 		int tempInt = columns;
 		columns = rows;
 		rows = tempInt;
-		delete temp;
+		delete[] temp;
 	}
 
 	void addRow(E value) {
@@ -87,6 +87,7 @@ public:
 		for (int i = 0; i < columns; i++)
 			tempRow[i] = value;
 		matriz[rows] = tempRow;
+		delete[] temp;
 		rows++;
 	}
 
@@ -99,7 +100,7 @@ public:
 			}
 			temp2[columns] = value;
 			matriz[i] = temp2;
-			delete temp1;
+			delete[] temp1;
 		}
 		columns++;
 	}
@@ -114,7 +115,7 @@ public:
 		for (int i = row + 1; i < rows; i++)
 			matriz[i - 1] = temp[i];
 		rows--;
-		delete temp;
+		delete[] temp;
 	}
 
 	void removeColumn(int column) {
@@ -126,9 +127,9 @@ public:
 			for (int j = 0; j < column; j++)
 				temp2[j] = temp1[j];
 			for (int j = column + 1; j < columns; j++)
-				temp2[j - 1] = temp2[j];
+				temp2[j - 1] = temp1[j];
 			matriz[i] = temp2;
-			delete temp1;
+			delete[] temp1;
 		}
 		columns--;
 	}

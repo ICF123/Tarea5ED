@@ -1,6 +1,8 @@
 #include <iostream>
 #include <string>
 #include <stdexcept>
+#include <cstdlib>
+#include <ctime>
 #include "Matriz.h"
 
 using std::cout;
@@ -11,6 +13,9 @@ using std::string;
 using std::stoi;
 using std::to_string;
 using std::runtime_error;
+using std::srand;
+using std::time;
+using std::rand;
 
 bool revisarOpcion(string opcion, int cantidad) {
     for (int i = 1; i <= cantidad; i++)
@@ -35,14 +40,15 @@ int regresarOpcionInt(string opcion) {
 }
 
 int main(){
+    srand(time(0));
     bool corriendo = true;
     bool primeraVez = true;
     Matriz<int>* matriz = new Matriz<int>(1, 1);
     string opcion, datos;
+    int filas, columnas, value;
     while (corriendo) {
         try {
             if (primeraVez) { //Intente usar ASCII art pero se veia horrible
-                int filas, columnas;
                 cout << "Crea tu matriz:" << endl;
                 cout << "Escriba la cantidad de filas: ";
                 getline(cin, datos);
@@ -76,20 +82,82 @@ int main(){
                 cout << "Escriba una opcion valida: ";
                 getline(cin, opcion);
             }
+            cout << endl;
             if (opcion == "1") {
-                int filas, columnas;
                 cout << "Escriba la posicion del valor en las filas: ";
                 getline(cin, datos);
                 filas = regresarOpcionInt(datos);
                 cout << "Escriba la posicion del valor en las columnas: ";
                 getline(cin, datos);
                 columnas = regresarOpcionInt(datos);
-                cout << "El valor es: " << matriz->getValue(filas, columnas) << endl;
+                cout << "El valor es: " << matriz->getValue(filas, columnas) << "." << endl;
             }
             else if (opcion == "2") {
-
+                cout << "Escriba la posicion a escribir en las filas: ";
+                getline(cin, datos);
+                filas = regresarOpcionInt(datos);
+                cout << "Escriba la posicion a escribir en las columnas: ";
+                getline(cin, datos);
+                columnas = regresarOpcionInt(datos);
+                cout << "Escriba el valor a escribir: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->setValue(filas, columnas, value);
+            }
+            else if (opcion == "3") {
+                cout << "El numero de filas es igual a: " << matriz->getRows() << "." << endl;
+            }
+            else if (opcion == "4") {
+                cout << "El numero de columnas es igual a: " << matriz->getColumns() << "." << endl;
+            }
+            else if (opcion == "5") {
+                cout << "Escriba el valor a escribir: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->setAll(value);
+            }
+            else if (opcion == "6") {
+                matriz->transpose();
+                cout << "La matriz ha sido transpuesta." << endl;
+            }
+            else if (opcion == "7") {
+                cout << "Escriba el valor a escribir en la nueva fila: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->addRow(value);
+            }
+            else if (opcion == "8") {
+                cout << "Escriba el valor a escribir en la nueva columna: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->addColumn(value);
+            }
+            else if (opcion == "9") {
+                cout << "Escriba la posicion de la fila a borrar: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->removeRow(value);
+            }
+            else if (opcion == "10") {
+                cout << "Escriba la posicion de la columna a borrar: ";
+                getline(cin, datos);
+                value = regresarOpcionInt(datos);
+                matriz->removeColumn(value);
+            }
+            else if (opcion == "11") {
+                int ranNum, maximo;
+                cout << "Escriba el numero maximo a aleatorizar: ";
+                getline(cin, datos);
+                maximo = regresarOpcionInt(datos);
+                for (int i = 0; i < matriz->getRows(); i++)
+                    for (int j = 0; j < matriz->getColumns(); j++) {
+                        ranNum = rand() % (maximo + 1);
+                        matriz->setValue(i, j, ranNum);
+                    }
+                cout << "La matriz ha sido randomizada." << endl;
             }
             else if (opcion == "12") {
+                cout << "Nos vemos.";
                 delete matriz;
                 corriendo = false;
             }
