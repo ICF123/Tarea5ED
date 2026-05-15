@@ -5,6 +5,8 @@
 
 #include <stdexcept>
 
+using std::cout;
+using std::endl;
 using std::runtime_error;
 
 template <typename E>
@@ -134,7 +136,7 @@ public:
 	void print() {
 		for (int i = 0; i < rows; i++) {
 			for (int j = 0; j < columns; j++)
-				cout << matriz[i, j] << "\t";
+				cout << matriz[i][j] << "\t";
 			cout << endl;
 		}
 	}

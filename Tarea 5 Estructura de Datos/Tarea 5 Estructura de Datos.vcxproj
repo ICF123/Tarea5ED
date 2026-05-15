@@ -129,6 +129,9 @@
   <ItemGroup>
     <ClCompile Include="Tarea 5 Estructura de Datos.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Matriz.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
